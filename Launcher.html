@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>POLYSTRIKE | Launcher</title>
+<style>
+:root {
+  --bg: #080b10; --panel: rgba(14,19,27,.88); --line: rgba(255,255,255,.12);
+  --muted: #9aa6b5; --white: #f4f7fb; --cyan: #62e6ff; --orange: #ff9c52;
+}
+* { box-sizing: border-box; }
+html, body { margin:0; min-height:100%; background:var(--bg); color:var(--white); font-family:Inter,Segoe UI,Arial,sans-serif; }
+body {
+  min-height:100vh; display:grid; place-items:center; overflow:hidden; padding:28px;
+  background:
+    radial-gradient(ellipse at 50% 18%, rgba(36,107,139,.24), transparent 42%),
+    radial-gradient(ellipse at 85% 85%, rgba(173,83,34,.12), transparent 38%),
+    linear-gradient(135deg,#080b10 0%,#101722 52%,#090d13 100%);
+}
+.grain { position:fixed; inset:0; pointer-events:none; opacity:.12;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.28'/%3E%3C/svg%3E"); }
+.shell { width:min(980px,100%); position:relative; }
+.topline { display:flex; justify-content:space-between; align-items:center; gap:16px; margin:0 2px 18px; color:var(--muted); font-size:11px; letter-spacing:.22em; text-transform:uppercase; }
+.status { display:flex; align-items:center; gap:8px; }
+.dot { width:7px;height:7px;border-radius:50%;background:#72e6a5;box-shadow:0 0 12px #72e6a5; }
+.panel { position:relative; overflow:hidden; padding:clamp(28px,6vw,64px); border:1px solid var(--line); border-radius:22px; background:var(--panel); box-shadow:0 28px 100px #0009; backdrop-filter:blur(18px); }
+.panel:before { content:""; position:absolute; inset:0 0 auto; height:2px; background:linear-gradient(90deg,transparent,var(--cyan),transparent); opacity:.8; }
+.eyebrow { color:var(--cyan); font-size:11px; font-weight:800; letter-spacing:.34em; text-transform:uppercase; }
+h1 { margin:12px 0 8px; font-size:clamp(42px,8vw,76px); line-height:.94; letter-spacing:-.065em; font-weight:900; }
+h1 span { color:var(--cyan); }
+.sub { color:var(--muted); max-width:520px; line-height:1.65; font-size:14px; }
+.cards { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:38px; }
+.launch {
+  position:relative; display:flex; flex-direction:column; align-items:flex-start; min-height:220px;
+  padding:26px; border:1px solid var(--line); border-radius:15px; color:var(--white);
+  background:linear-gradient(145deg,rgba(255,255,255,.065),rgba(255,255,255,.015));
+  text-align:left; cursor:pointer; transition:transform .2s,border-color .2s,background .2s,box-shadow .2s;
+}
+.launch:hover { transform:translateY(-4px); border-color:var(--cyan); background:linear-gradient(145deg,rgba(98,230,255,.12),rgba(255,255,255,.025)); box-shadow:0 14px 40px #0006; }
+.launch.mod:hover { border-color:var(--orange); background:linear-gradient(145deg,rgba(255,156,82,.13),rgba(255,255,255,.025)); }
+.kicker { color:var(--muted); font-size:10px; letter-spacing:.2em; text-transform:uppercase; }
+.icon { width:48px;height:48px; display:grid;place-items:center; margin:18px 0 14px; border:1px solid #62e6ff55; border-radius:12px; color:var(--cyan); background:#62e6ff12; }
+.mod .icon { color:var(--orange); border-color:#ff9c5255; background:#ff9c5212; }
+.icon svg { width:24px;height:24px; }
+.name { font-size:25px; font-weight:900; letter-spacing:.04em; }
+.desc { margin-top:7px; color:var(--muted); font-size:12px; line-height:1.5; }
+.arrow { position:absolute; right:24px; bottom:24px; font-size:22px; color:var(--cyan); }
+.mod .arrow { color:var(--orange); }
+.footer { display:flex; justify-content:space-between; gap:16px; margin:18px 3px 0; color:#647181; font-size:10px; letter-spacing:.13em; text-transform:uppercase; }
+#message { min-height:18px; margin-top:16px; color:var(--muted); font-size:12px; }
+@media(max-width:650px) { .cards{grid-template-columns:1fr}.launch{min-height:190px}.topline,.footer{font-size:9px} }
+</style>
+</head>
+<body>
+<div class="grain"></div>
+<main class="shell">
+  <div class="topline">
+    <div>Iron Will Interactive <span style="color:#465465">/</span> Game Launcher</div>
+    <div class="status"><span class="dot"></span> LOCAL BUILD</div>
+  </div>
+  <section class="panel">
+    <div class="eyebrow">Choose your deployment</div>
+    <h1>POLY<span>STRIKE</span></h1>
+    <p class="sub">Select how you want to launch. Jump straight into the standalone build, or open the editor environment to work on your mods.</p>
+    <div class="cards">
+      <button class="launch" onclick="launch('play')">
+        <div class="kicker">01 / Game</div>
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M8 5h8a4 4 0 0 1 3.8 2.8l1.1 4.1a3 3 0 0 1-4.8 3l-2.1-1.7h-4l-2.1 1.7a3 3 0 0 1-4.8-3l1.1-4.1A4 4 0 0 1 8 5Z"/><path d="M8 9v4M6 11h4M16.5 10.5h.01M18.5 12.5h.01"/></svg></div>
+        <div class="name">PLAY</div>
+        <div class="desc">Launch the standalone game build.</div>
+        <div class="arrow">↗</div>
+      </button>
+      <button class="launch mod" onclick="launch('mod')">
+        <div class="kicker">02 / Creation</div>
+        <div class="icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="m14.5 6.5 3 3M4 20l4.5-1 10.8-10.8a2.1 2.1 0 0 0-3-3L5.5 16 4 20Z"/><path d="M13 4 20 11"/></svg></div>
+        <div class="name">MOD</div>
+        <div class="desc">Open the editor and modding workspace.</div>
+        <div class="arrow">↗</div>
+      </button>
+    </div>
+    <div id="message" aria-live="polite">Ready. Select a launch option.</div>
+  </section>
+  <div class="footer"><span>PolyStrike</span><span>Built for local use</span><span>v1.0</span></div>
+</main>
+<script>
+function launch(which) {
+  const endpoint = which === 'play' ? '/launch/play' : '/launch/mod';
+  const message = document.getElementById('message');
+  message.textContent = 'Starting ' + (which === 'play' ? 'standalone game…' : 'mod editor…');
+  fetch(endpoint, { method: 'POST' })
+    .then(r => { if (!r.ok) throw new Error('Launcher service unavailable'); return r.text(); })
+    .then(text => { message.textContent = text; })
+    .catch(() => { message.textContent = 'Start this launcher with StartLauncher.bat, then try again.'; });
+}
+</script>
+</body>
+</html>
