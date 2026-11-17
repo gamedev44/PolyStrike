@@ -24,6 +24,15 @@ If your editor and project reside elsewhere, you will need to modify the paths i
 
 *Verification:* Open each `.bat` file in a text editor (such as Notepad or Cursor), locate the directory path variables, and verify they point precisely to where Unreal Engine 5.8 and your workspace reside on your machine.
 
+---
+
+## 🛠️ Prerequisites
+
+To Play ,Run and or Edit/Mod this project, you will need the Unreal Engine 5.8 editor installed on your system. 
+* If you don't already have the Epic Games Launcher installed, you can download it here: [Epic Games Launcher Installer](https://launcher-public-service-prod06.ol.epicgames.com/launcher/api/installer/download/EpicGamesLauncherSetup-x86_64.exe)
+
+---
+
 ## 🚀 Launch Instructions
 
 Once your paths are configured (or if you are using the default C: drive setup):
